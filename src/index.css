@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gray: #d9d9d9;
+    &,
+    &.light-mode {
+      --one: #9e9e9e;
+      --two: #383838;
+
+      --text-color: #111111;
+    }
+
+    &.dark-mode {
+      --one: #444444;
+      --two: #373636;
+      --text-color: #ffffff;
+    }
+  }
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(90deg, var(--one), var(--two));
+  height: 100vh;
+}
