@@ -31,5 +31,14 @@
 
 body {
   background: linear-gradient(90deg, var(--one), var(--two));
-  height: 100vh;
+}
+
+@layer components {
+  .mainDiv {
+    @apply min-h-[280px] rounded-xl bg-bgColor p-[20px] text-center font-bold;
+  }
+}
+
+.mainDiv {
+  box-shadow: 6px 6px 2px 1px #1e1e1e;
 }
