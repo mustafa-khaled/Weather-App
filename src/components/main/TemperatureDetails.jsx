@@ -22,8 +22,8 @@ function TemperatureDetails({ weather }) {
     weather?.forecast?.forecastday[0] || {};
 
   return (
-    <div className="mainDiv flex w-full items-center gap-[10px] text-sm sm:text-base md:w-[60%]">
-      <div className="w-[calc(100%/3)]">
+    <div className="mainDiv flex w-full flex-col  items-center gap-[10px] text-sm sm:flex-row sm:text-base md:w-[60%]">
+      <div className="w-full sm:w-[calc(100%/3)]">
         <h2 className="flex items-center justify-center gap-[2px] text-3xl">
           <BsThermometerSun />
           {temp_c?.toFixed()}°F
@@ -47,14 +47,14 @@ function TemperatureDetails({ weather }) {
         {/*Sunrise &  Sunset */}
       </div>
 
-      <div className="w-[calc(100%/3)]">
+      <div className="w-full sm:w-[calc(100%/3)]">
         {icon && <img src={icon} alt={text} className="mx-auto w-[100px]" />}
         <h2 className="text-2xl">{text}</h2>
       </div>
 
-      <div className="w-[calc(100%/3)] gap-[10px]">
+      <div className="flex w-full items-start justify-center gap-[20px] sm:block sm:w-[calc(100%/3)]">
         <div className="flex items-center gap-[10px]">
-          <div className="w-[50%]  text-center">
+          <div className="w-[50%] text-center">
             <FaWater className="mx-auto text-2xl" />
             <p>{humidity?.toFixed()}%</p>
             <p className="text-xs">Humidity</p>
@@ -67,7 +67,7 @@ function TemperatureDetails({ weather }) {
           </div>
         </div>
 
-        <div className="mt-[20px] flex items-center gap-[10px]">
+        <div className="flex items-center gap-[10px] sm:mt-[20px]">
           <div className="w-[50%] text-center">
             <BsClock className="mx-auto text-2xl" />
             <p>{pressure_mb?.toFixed()}hpa</p>
