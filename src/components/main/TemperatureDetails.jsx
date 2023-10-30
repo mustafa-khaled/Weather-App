@@ -1,66 +1,85 @@
-import { formatTime } from "../../utils/helpers";
-import { iconUrlFromCode } from "../services/weatherServices";
-import { BsSunset, BsSunrise, BsThermometerSun } from "react-icons/bs";
+import {
+  BsSunset,
+  BsSunrise,
+  BsThermometerSun,
+  BsClock,
+  BsWind,
+} from "react-icons/bs";
 import { FaWater } from "react-icons/fa6";
+import { BiSolidWidget } from "react-icons/bi";
 
 function TemperatureDetails({ weather }) {
   const {
-    temp,
+    condition: { icon, text } = {},
+    temp_c,
     humidity,
-    feels_like,
-    icon,
-    details,
-    temp_max,
-    temp_min,
-    speed,
-    sunrise,
-    sunset,
-  } = weather || {};
+    wind_kph,
+    pressure_mb,
+    uv,
+  } = weather?.current || {};
+
+  const { astro: { sunrise, sunset } = {} } =
+    weather?.forecast?.forecastday[0] || {};
 
   return (
     <div className="mainDiv flex w-full items-center gap-[10px] text-sm sm:text-base md:w-[60%]">
-      <div className="w-[calc(100%/3)]  text-left">
-        <h2 className="flex items-center gap-[2px] text-3xl">
+      <div className="w-[calc(100%/3)]">
+        <h2 className="flex items-center justify-center gap-[2px] text-3xl">
           <BsThermometerSun />
-          {temp?.toFixed()}°F
+          {temp_c?.toFixed()}°F
         </h2>
-        <p className="text-2xl">Feels like: {feels_like?.toFixed()}°F</p>
 
         {/*Sunrise &  Sunset */}
-        <div className="my-[5px] flex items-center gap-[5px]">
+        <div className="my-[5px] flex items-center justify-center gap-[5px]">
           <BsSunset className="text-2xl" />
           <div className="text-xs">
             <p>Sunrise: </p>
-            <p>{formatTime(sunrise)}</p>
+            <p>{sunrise}</p>
           </div>
         </div>
-        <div className="flex items-center gap-[5px] ">
+        <div className="flex items-center justify-center gap-[5px] ">
           <BsSunrise className="text-2xl" />
           <div className="text-xs">
             <p>Sunset:</p>
-            <p> {formatTime(sunset)}</p>
+            <p> {sunset}</p>
           </div>
         </div>
         {/*Sunrise &  Sunset */}
       </div>
 
-      <div className="w-[calc(100%/3)] ">
-        {icon && (
-          <img
-            src={iconUrlFromCode(icon)}
-            alt={details}
-            className="mx-auto w-[150px]"
-          />
-        )}
-        <h2 className="text-2xl">{details}</h2>
+      <div className="w-[calc(100%/3)]">
+        {icon && <img src={icon} alt={text} className="mx-auto w-[100px]" />}
+        <h2 className="text-2xl">{text}</h2>
       </div>
 
-      <div className="w-[calc(100%/3)] text-right">
-        <h2>Humidity: {humidity?.toFixed()}%</h2>
-        <p>Speed: {speed?.toFixed()}km/h</p>
+      <div className="w-[calc(100%/3)] gap-[10px]">
+        <div className="flex items-center gap-[10px]">
+          <div className="w-[50%]  text-center">
+            <FaWater className="mx-auto text-2xl" />
+            <p>{humidity?.toFixed()}%</p>
+            <p className="text-xs">Humidity</p>
+          </div>
 
-        <p>Low: {temp_min?.toFixed()}*</p>
-        <p>High: {temp_max?.toFixed()}*</p>
+          <div className="w-[50%] text-center">
+            <BsWind className="mx-auto text-2xl" />
+            <p>{wind_kph?.toFixed()}km/h</p>
+            <p className="text-xs">Speed</p>
+          </div>
+        </div>
+
+        <div className="mt-[20px] flex items-center gap-[10px]">
+          <div className="w-[50%] text-center">
+            <BsClock className="mx-auto text-2xl" />
+            <p>{pressure_mb?.toFixed()}hpa</p>
+            <p className="text-xs">Pressure</p>
+          </div>
+
+          <div className="w-[50%]  text-center">
+            <BiSolidWidget className="mx-auto text-2xl" />
+            <p>{uv}</p>
+            <p className="text-xs">Uv</p>
+          </div>
+        </div>
       </div>
     </div>
   );

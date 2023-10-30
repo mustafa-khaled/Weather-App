@@ -7,6 +7,7 @@ export default {
         grayOne: "var(--gray)",
         textColor: "var(--text-color)",
         bgColor: "var(--one)",
+        bgColor2: "var(--two)",
       },
     },
   },
