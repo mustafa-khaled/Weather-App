@@ -4,11 +4,13 @@ import TimeAndLocation from "./TimeAndLocation";
 import DaysForecast from "./DaysForecast";
 import HourlyForecast from "./HourlyForecast";
 import TemperatureDetails from "./TemperatureDetails";
+import Empty from "./Empty";
+import Loader from "../loader/Loader";
 
-function Main() {
-  const [searchQuery, setSearchQuery] = useState("cairo");
+function Main({ searchQuery }) {
   const [weather, setWeather] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -20,7 +22,7 @@ function Main() {
         const data = await response.json();
         setWeather(data);
       } catch (error) {
-        console.error("Error fetching weather data:", error);
+        throw new Error(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -31,7 +33,11 @@ function Main() {
     }
   }, [searchQuery]);
 
-  if (isLoading) return <div>Loadimg...</div>;
+  if (isLoading) return <Loader />;
+
+  if (!weather) return <Empty message="Enter a location." />;
+  if (weather?.error) return <Empty message={weather?.error.message} />;
+
   return (
     <div className="container mx-auto mt-[20px] min-h-[calc(100vh-90px)] px-[10px] pb-[20px] text-textColor">
       <div className="flex flex-col items-start gap-[20px] md:flex-row">
