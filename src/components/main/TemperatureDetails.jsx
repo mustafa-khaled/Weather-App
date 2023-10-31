@@ -31,14 +31,14 @@ function TemperatureDetails({ weather }) {
 
         {/*Sunrise &  Sunset */}
         <div className="my-[10px] flex items-center justify-center gap-[10px]">
-          <BsSunset className="text-4xl" />
+          <BsSunrise className="text-4xl" />
           <div className="text-xs">
             <p>Sunrise: </p>
             <p>{sunrise}</p>
           </div>
         </div>
         <div className="flex items-center justify-center gap-[10px] ">
-          <BsSunrise className="text-4xl" />
+          <BsSunset className="text-4xl" />
           <div className="text-xs">
             <p>Sunset:</p>
             <p> {sunset}</p>
