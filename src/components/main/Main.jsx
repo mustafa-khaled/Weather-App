@@ -10,7 +10,6 @@ import Loader from "../loader/Loader";
 function Main({ searchQuery }) {
   const [weather, setWeather] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
