@@ -16,7 +16,7 @@ function DaysForecast({ weather }) {
               <img src={d?.day?.condition?.icon} alt="" />
             </div>
             <div className="w-[100px)] text-left">
-              <p>{d?.day?.maxtemp_c}°F</p>
+              <p>{d?.day?.maxtemp_c}°C</p>
             </div>
             <div className="w-[50%] ">
               <p>{formatTimestamp(d?.date_epoch)}</p>

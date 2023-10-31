@@ -26,7 +26,7 @@ function TemperatureDetails({ weather }) {
       <div className="w-full sm:w-[calc(100%/3)]">
         <h2 className="flex items-center justify-center gap-[2px] text-3xl">
           <BsThermometerSun />
-          {temp_c?.toFixed()}°F
+          {temp_c?.toFixed()}°C
         </h2>
 
         {/*Sunrise &  Sunset */}
